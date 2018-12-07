@@ -16,7 +16,6 @@ namespace ItemFinder.Controllers
             _repository = repository;
         }
 
-        // GET api/values
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Item>>> Get()
         {
@@ -24,7 +23,6 @@ namespace ItemFinder.Controllers
             return Ok(items);
         }
 
-        // GET api/values/5
         [HttpGet("{x},{y}")]
         public async Task<ActionResult<Task<Item>>> Get(double x, double y)
         {
