@@ -26,6 +26,10 @@ namespace ItemFinder.Controllers
         [HttpGet("{x},{y}")]
         public async Task<ActionResult<Task<Item>>> Get(double x, double y)
         {
+            if (x > 90 || x < -90)
+            {
+                return BadRequest("Values are supposed to be between -90 and 90");
+            }
             var result = await _repository.FindCloseItem(new ItemLocation
             {
                 X = x,
@@ -35,9 +39,10 @@ namespace ItemFinder.Controllers
         }
 
         [HttpPost]
-        public async Task Post([FromBody] Item value)
+        public async Task<ActionResult> Post([FromBody] Item value)
         {
             await _repository.PostNewItem(value);
+            return Ok();
         }
     }
 }
